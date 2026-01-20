@@ -1,20 +1,21 @@
 import { Routes, Route } from "react-router-dom";
-import Homepage from "./pages/HomePage";
+import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Policy from "./pages/Policy";
-import Pagenotfound from "./pages/Pagenotfound";
+import PageNotFound from "./pages/Pagenotfound";
+
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/policy" element={<Policy />} />
-        <Route path="*" element={<Pagenotfound />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/privacy" element={<Policy />} />
+
+      {/* 404 route MUST be last */}
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
   );
 }
 
