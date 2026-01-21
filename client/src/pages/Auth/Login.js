@@ -3,11 +3,13 @@ import Layout from "../../components/Layouts/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-// import Login from './Login';
+import "../../Styles/AuthStyle.css";
+import { useAuth } from "../../Context/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [auth, setAuth] = useAuth();
 
   const navigate = useNavigate();
 
@@ -21,28 +23,32 @@ const Login = () => {
       });
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token,
+        });
+        localStorage.setItem("auth", JSON.stringify(res.data));
         navigate("/");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
+      console.log(error.response?.data);
+      toast.error(error.response?.data?.message || "Login failed");
     }
   };
   return (
     <Layout title="Login - Mern app">
-      <div className="Login">
-        <h1> Login Page </h1>
-
+      <div className="form-container">
         <form onSubmit={handleSubmit}>
+          <h4 className="title">LOGIN FORM</h4>
           <div className="mb-3">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
-              // id="exampleInputEmail1"
+              className="form-control mb-3"
               placeholder="Enter Your Email"
               required
             />
@@ -60,7 +66,7 @@ const Login = () => {
           </div>
 
           <button type="submit" className="btn btn-primary">
-            Submit
+            Login
           </button>
         </form>
       </div>
