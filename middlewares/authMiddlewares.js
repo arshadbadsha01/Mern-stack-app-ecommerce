@@ -5,16 +5,29 @@ import userModels from "../models/userModels.js";
 // Protected Routes token base
 export const requireSignIn = async (req, res, next) => {
   try {
-    const decode = JWT.verify(
-      req.headers.authorization,
-      process.env.JWT_SECRET,
-    );
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) return res.status(401).send({ ok: false });
+
+    const decode = JWT.verify(token, process.env.JWT_SECRET);
     req.user = decode;
     next();
   } catch (error) {
-    console.log(error);
+    return res.status(401).send({ ok: false });
   }
 };
+
+// export const requireSignIn = async (req, res, next) => {
+//   try {
+//     const decode = JWT.verify(
+//       req.headers.authorization,
+//       process.env.JWT_SECRET,
+//     );
+//     req.user = decode;
+//     next();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // admin access
 export const isAdmin = async (req, res, next) => {
