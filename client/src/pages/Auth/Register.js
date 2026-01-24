@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import Layout from "../../components/Layouts/Layout";
+import Layout from "./../../components/Layouts/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-// import Register from './Register';
 import "../../Styles/AuthStyle.css";
-
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,7 +27,7 @@ const Register = () => {
       });
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
-        navigate("/");
+        navigate("/login");
       } else {
         toast.error(res.data.message);
       }
@@ -38,9 +36,10 @@ const Register = () => {
       toast.error("Something went wrong");
     }
   };
+
   return (
-    <Layout title="Register - Mern app">
-      <div className="form-container">
+    <Layout title="Register - Mern App">
+      <div className="form-container ">
         <form onSubmit={handleSubmit}>
           <h4 className="title">REGISTER FORM</h4>
           <div className="mb-3">
@@ -48,9 +47,11 @@ const Register = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="form-control mb-3"
+              className="form-control"
+              id="exampleInputEmail1"
               placeholder="Enter Your Name"
               required
+              autoFocus
             />
           </div>
           <div className="mb-3">
@@ -59,8 +60,8 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
-              // id="exampleInputEmail1"
-              placeholder="Enter Your Email"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Email "
               required
             />
           </div>
@@ -70,7 +71,7 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"
-              // id="exampleInputPassword1"
+              id="exampleInputPassword1"
               placeholder="Enter Your Password"
               required
             />
@@ -81,8 +82,8 @@ const Register = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="form-control"
-              // id="exampleInputEmail1"
-              placeholder="Enter Your Phone No"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Phone"
               required
             />
           </div>
@@ -92,7 +93,7 @@ const Register = () => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               className="form-control"
-              // id="exampleInputEmail1"
+              id="exampleInputEmail1"
               placeholder="Enter Your Address"
               required
             />
@@ -103,8 +104,8 @@ const Register = () => {
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               className="form-control"
-              // id="exampleInputEmail1"
-              placeholder="What is your Favorite Sports"
+              id="exampleInputEmail1"
+              placeholder="What is Your Favorite sports"
               required
             />
           </div>

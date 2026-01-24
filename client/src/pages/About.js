@@ -1,15 +1,15 @@
 import React from "react";
-import Layout from "../components/Layouts/Layout";
+import Layout from "./../components/Layouts/Layout";
 
 const About = () => {
   return (
-    <Layout title={"About us-Mern app"}>
-      <div className=" row Contactus ">
-        <div className=" col-md-6 ">
+    <Layout title={"About us - Mern app"}>
+      <div className="row contactus ">
+        <div className="col-md-6 ">
           <img
-            src="/Images/about-us.jpg"
+            src="/images/about.jpeg"
             alt="contactus"
-            style={{ width: " 100%" }}
+            style={{ width: "100%" }}
           />
         </div>
         <div className="col-md-4">

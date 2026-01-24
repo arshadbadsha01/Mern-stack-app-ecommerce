@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Layout from "../../components/Layouts/Layout";
+import Layout from "./../../components/Layouts/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [answer, setAnswer] = useState("");
+
   const navigate = useNavigate();
 
   // form function
@@ -23,27 +24,29 @@ const ForgotPassword = () => {
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
 
-        navigate("/login", { replace: true });
+        navigate("/login");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error.response?.data);
-      toast.error(error.response?.data?.message || "Login failed");
+      console.log(error);
+      toast.error("Something went wrong");
     }
   };
   return (
-    <Layout title={"ForgotPassword-Mern App"}>
-      <div className="form-container">
+    <Layout title={"Forgot Password - Mern APP"}>
+      <div className="form-container ">
         <form onSubmit={handleSubmit}>
           <h4 className="title">RESET PASSWORD</h4>
+
           <div className="mb-3">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="form-control mb-3"
-              placeholder="Enter Your Email"
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Email "
               required
             />
           </div>
@@ -52,8 +55,9 @@ const ForgotPassword = () => {
               type="text"
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
-              className="form-control mb-3"
-              placeholder="Enter Your Favorite Sports"
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your favorite Sport Name "
               required
             />
           </div>
@@ -63,14 +67,14 @@ const ForgotPassword = () => {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               className="form-control"
-              // id="exampleInputPassword1"
-              placeholder="Enter Your New Password"
+              id="exampleInputPassword1"
+              placeholder="Enter Your Password"
               required
             />
           </div>
 
           <button type="submit" className="btn btn-primary">
-            RESET PASSWORD
+            RESET
           </button>
         </form>
       </div>

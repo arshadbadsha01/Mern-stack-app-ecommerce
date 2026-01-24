@@ -1,42 +1,28 @@
-import JWTimport from "jsonwebtoken";
 import JWT from "jsonwebtoken";
-import userModels from "../models/userModels.js";
+import userModel from "../models/userModels.js";
 
-// Protected Routes token base
+//Protected Routes token base
 export const requireSignIn = async (req, res, next) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) return res.status(401).send({ ok: false });
-
-    const decode = JWT.verify(token, process.env.JWT_SECRET);
+    const decode = JWT.verify(
+      req.headers.authorization,
+      process.env.JWT_SECRET,
+    );
     req.user = decode;
     next();
   } catch (error) {
-    return res.status(401).send({ ok: false });
+    console.log(error);
   }
 };
 
-// export const requireSignIn = async (req, res, next) => {
-//   try {
-//     const decode = JWT.verify(
-//       req.headers.authorization,
-//       process.env.JWT_SECRET,
-//     );
-//     req.user = decode;
-//     next();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// admin access
+//admin access
 export const isAdmin = async (req, res, next) => {
   try {
-    const user = await userModels.findById(req.user._id);
-    if (!user.role !== 1) {
+    const user = await userModel.findById(req.user._id);
+    if (user.role !== 1) {
       return res.status(401).send({
         success: false,
-        message: "unauthorized access",
+        message: "UnAuthorized Access",
       });
     } else {
       next();
@@ -46,7 +32,7 @@ export const isAdmin = async (req, res, next) => {
     res.status(401).send({
       success: false,
       error,
-      message: "error in admin middleware",
+      message: "Error in admin middleware",
     });
   }
 };

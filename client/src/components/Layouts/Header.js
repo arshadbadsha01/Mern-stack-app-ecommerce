@@ -1,14 +1,10 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import { GiShoppingBag } from "react-icons/gi";
 import { useAuth } from "../../Context/auth";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import Dashboard from "./../../pages/user/Dashboard";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
-  const navigate = useNavigate();
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -16,7 +12,6 @@ const Header = () => {
       token: "",
     });
     localStorage.removeItem("auth");
-    navigate("/login");
     toast.success("Logout Successfully");
   };
   return (
@@ -36,7 +31,7 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <Link to="/" className="navbar-brand">
-              <GiShoppingBag /> Mern App
+              🛒 Mern App
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -49,15 +44,15 @@ const Header = () => {
                   Category
                 </NavLink>
               </li>
-              {!auth.user ? (
+              {!auth?.user ? (
                 <>
                   <li className="nav-item">
-                    <NavLink to="/register" className="nav-link" href="#">
+                    <NavLink to="/register" className="nav-link">
                       Register
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink to="/login" className="nav-link" href="#">
+                    <NavLink to="/login" className="nav-link">
                       Login
                     </NavLink>
                   </li>
@@ -76,7 +71,12 @@ const Header = () => {
                     </NavLink>
                     <ul className="dropdown-menu">
                       <li>
-                        <NavLink to="/dashboard" className="dropdown-item">
+                        <NavLink
+                          to={`/dashboard/${
+                            auth?.user?.role === 1 ? "admin" : "user"
+                          }`}
+                          className="dropdown-item"
+                        >
                           Dashboard
                         </NavLink>
                       </li>
@@ -85,7 +85,6 @@ const Header = () => {
                           onClick={handleLogout}
                           to="/login"
                           className="dropdown-item"
-                          href="#"
                         >
                           Logout
                         </NavLink>
@@ -95,8 +94,8 @@ const Header = () => {
                 </>
               )}
               <li className="nav-item">
-                <NavLink to="/Cart" className="nav-link" href="#">
-                  Cart (0 )
+                <NavLink to="/cart" className="nav-link">
+                  Cart (0)
                 </NavLink>
               </li>
             </ul>
