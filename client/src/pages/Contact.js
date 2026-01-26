@@ -3,12 +3,12 @@ import Layout from "./../components/Layouts/Layout";
 import { BiMailSend, BiPhoneCall, BiSupport } from "react-icons/bi";
 const Contact = () => {
   return (
-    <Layout title={"Contact us"}>
-      <div className="row contactus ">
+    <Layout title={"Contact-us"}>
+      <div className="row contact-us ">
         <div className="col-md-6 ">
           <img
-            src="/images/contactus.jpeg"
-            alt="contactus"
+            src="/images/contact-us.jpeg"
+            alt="contact-us"
             style={{ width: "100%" }}
           />
         </div>
