@@ -90,11 +90,18 @@
 }
 /* ========================================= */
 /* =========contact us ========= */
-.contactus {
+.contact-us {
   margin: 0;
   padding: 0;
   height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ====================
+====== product link ======= */
+.product-link {
+  text-decoration: none !important;
+  color: black !important;
 }
