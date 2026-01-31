@@ -6,6 +6,8 @@ import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 import { useCart } from "../Context/cart";
 import toast from "react-hot-toast";
+import "../Styles/Homepage.css";
+
 const HomePage = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useCart();
@@ -91,7 +93,7 @@ const HomePage = () => {
     if (checked.length || radio.length) filterProduct();
   }, [checked, radio]);
 
-  //get filterd product
+  //get filtered product
   const filterProduct = async () => {
     try {
       const { data } = await axios.post("/api/v1/product/product-filters", {
@@ -173,6 +175,13 @@ const HomePage = () => {
                   >
                     ADD TO CART
                   </button>
+                </div>
+                <div className="col-md-6 ">
+                  <img
+                    src="/Images/banner.png"
+                    alt="Banner"
+                    style={{ width: "100%" }}
+                  />
                 </div>
               </div>
             ))}
