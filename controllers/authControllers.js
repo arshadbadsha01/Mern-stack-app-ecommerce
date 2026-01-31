@@ -1,4 +1,5 @@
 import userModel from "../models/userModels.js";
+import orderModel from "../models/orderModel.js";
 import { comparePassword, hashPassword } from "./../helpers/authHelpers.js";
 import JWT from "jsonwebtoken";
 
@@ -214,14 +215,14 @@ export const getOrdersController = async (req, res) => {
     });
   }
 };
-//orders
+//get all orders
 export const getAllOrdersController = async (req, res) => {
   try {
     const orders = await orderModel
       .find({})
       .populate("products", "-photo")
       .populate("buyer", "name")
-      .sort({ createdAt: "-1" });
+      .sort({ createdAt: -1 });
     res.json(orders);
   } catch (error) {
     console.log(error);
