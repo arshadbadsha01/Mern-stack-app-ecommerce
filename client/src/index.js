@@ -7,13 +7,11 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./Context/auth.js";
 import { SearchProvider } from "./Context/search.js";
 import { CartProvider } from "./Context/cart.js";
-import "./Styles/App.css";
-import "./Styles/AuthStyle.css";
-import "./Styles/Homepage.css";
+import "./Styles/AuthStyles.css";
+import "./Styles/HomePage.css";
 import "./Styles/CartStyles.css";
 import "./Styles/CategoryProductStyles.css";
 import "./Styles/ProductDetailsStyles.css";
-
 import "antd/dist/reset.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
