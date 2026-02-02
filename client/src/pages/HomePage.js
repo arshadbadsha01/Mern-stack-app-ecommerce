@@ -7,7 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Layout from "./../components/Layouts/Layout";
 import { AiOutlineReload } from "react-icons/ai";
-import "../Styles/HomePage.css";
+// import "../Styles/HomePage.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
